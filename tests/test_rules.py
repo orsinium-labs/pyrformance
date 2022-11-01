@@ -32,12 +32,6 @@ def parse_output(stdout: str) -> list[dict]:
     ('1 in set(y)', 'set-contains'),
     ('1 in set(x + y)', 'set-contains'),
 
-    ('for x in a + b: ...', 'itertools-chain'),
-    ('for x in a + b + c: ...', 'itertools-chain'),
-    ('for x in list(a) + b: ...', 'itertools-chain'),
-    ('for x in [*a, *b]: ...', 'itertools-chain'),
-    ('for x in [a, *b]: ...', 'itertools-chain'),
-
     ('any(set(x))', 'any-all-laziness'),
     ('all(set(x))', 'any-all-laziness'),
     ('any(list(x))', 'any-all-laziness'),
