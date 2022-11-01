@@ -75,7 +75,7 @@ def _(r):
         f'hello{a}{b}'
 
 
-dict_merge = Group()
+dict_merge = Group('dict-merge')
 
 
 @dict_merge.add(name='bad1')
@@ -103,8 +103,29 @@ def _(r):
         d1 | d2
 
 
+re_compile = Group('re-compile')
+
+
+@re_compile.add(name='bad')
+def _(r):
+    import re
+    text = str(list(range(1000)))
+    for _ in r:
+        re.match('[0-9]+', text)
+
+
+@re_compile.add(name='good')
+def _(r):
+    import re
+    text = str(list(range(1000)))
+    rex = re.compile('[0-9]+')
+    for _ in r:
+        rex.match(text)
+
+
 if __name__ == '__main__':
     dict_merge.print()
+    re_compile.print()
     set_contains.print()
     str_concat.print()
     str_removeprefix.print()

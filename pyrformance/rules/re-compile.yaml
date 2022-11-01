@@ -1,0 +1,15 @@
+rules:
+  - id: re-compile
+    languages:
+      - python
+    severity: ERROR
+    message: pre-compile regexes with `re.compile`.
+    pattern-either:
+      - pattern: re.findall("...", ...)
+      - pattern: re.finditer("...", ...)
+      - pattern: re.fullmatch("...", ...)
+      - pattern: re.match("...", ...)
+      - pattern: re.search("...", ...)
+      - pattern: re.split("...", ...)
+      - pattern: re.sub("...", ...)
+      - pattern: re.subn("...", ...)

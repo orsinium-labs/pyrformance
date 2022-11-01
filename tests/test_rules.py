@@ -31,6 +31,7 @@ def parse_output(stdout: str) -> list[dict]:
     ('x in set(y)', 'set-contains'),
     ('1 in set(y)', 'set-contains'),
     ('1 in set(x + y)', 'set-contains'),
+    ('1 in y', None),
 
     ('any(set(x))', 'any-all-laziness'),
     ('all(set(x))', 'any-all-laziness'),
@@ -42,6 +43,11 @@ def parse_output(stdout: str) -> list[dict]:
     ('"hello" + a + b', 'str-concat'),
 
     ('{**a, **b}', 'dict-merge'),
+
+    ('import re\nre.match("[0-9]", x)', 're-compile'),
+    ('import re\nre.finditer("[0-9]", x)', 're-compile'),
+    ('import re\nre.match(pattern, x)', None),
+    ('import re\nre.compile("[0-9]")', None),
 ])
 def test_rule_violation(code: str, expected: str | None, tmp_path: Path) -> None:
     file_path = tmp_path / 'example.py'
