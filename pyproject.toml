@@ -28,10 +28,10 @@ keywords = [
     "cli",
     "pythonic",
 ]
-dependencies = []
+dependencies = ["semgrep"]
 
 [project.optional-dependencies]
-test = ["pytest", "pytest-cov", "pytest-xdist"]
+test = ["pytest", "pytest-cov", "pytest-xdist", "true-north"]
 lint = ["isort", "flake8", "unify", "mypy"]
 
 [project.urls]
