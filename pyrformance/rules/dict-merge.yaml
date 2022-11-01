@@ -1,0 +1,12 @@
+rules:
+  - id: dict-merge
+    languages:
+      - python
+    severity: ERROR
+    message: Use `|` to merge dicts.
+    pattern-either:
+      - pattern: >
+          {**..., **...}
+      - pattern: |
+          $X = $Y.copy()
+          $X.update(...)

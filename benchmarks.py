@@ -1,26 +1,26 @@
 from true_north import Group
 
-maxsplit = Group('str-split-maxsplit')
+str_split_maxsplit = Group('str-split-maxsplit')
 
 
-@maxsplit.add(name='bad')
+@str_split_maxsplit.add(name='bad')
 def _(r):
     text = 'ab cd ' * 100
     for _ in r:
         text.split()[0]
 
 
-@maxsplit.add(name='good')
+@str_split_maxsplit.add(name='good')
 def _(r):
     text = 'ab cd ' * 100
     for _ in r:
         text.split(maxsplit=1)[0]
 
 
-removeprefix = Group('str-removeprefix')
+str_removeprefix = Group('str-removeprefix')
 
 
-@removeprefix.add(name='bad')
+@str_removeprefix.add(name='bad')
 def _(r):
     text = 'lorem ipsum dolor sit amet'
     prefix = 'lorem ipsum'
@@ -29,7 +29,7 @@ def _(r):
             text[len(prefix):]
 
 
-@removeprefix.add(name='good')
+@str_removeprefix.add(name='good')
 def _(r):
     text = 'lorem ipsum dolor sit amet'
     prefix = 'lorem ipsum'
@@ -75,8 +75,37 @@ def _(r):
         f'hello{a}{b}'
 
 
+dict_merge = Group()
+
+
+@dict_merge.add(name='bad1')
+def _(r):
+    d1 = {i: i * 2 for i in range(100)}
+    d2 = {i: i * 2 for i in range(100)}
+    for _ in r:
+        {**d1, **d2}
+
+
+@dict_merge.add(name='bad2')
+def _(r):
+    d1 = {i: i * 2 for i in range(100)}
+    d2 = {i: i * 2 for i in range(100)}
+    for _ in r:
+        d = d1.copy()
+        d.update(d2)
+
+
+@dict_merge.add(name='good')
+def _(r):
+    d1 = {i: i * 2 for i in range(100)}
+    d2 = {i: i * 2 for i in range(100)}
+    for _ in r:
+        d1 | d2
+
+
 if __name__ == '__main__':
-    maxsplit.print()
-    removeprefix.print()
+    dict_merge.print()
     set_contains.print()
     str_concat.print()
+    str_removeprefix.print()
+    str_split_maxsplit.print()

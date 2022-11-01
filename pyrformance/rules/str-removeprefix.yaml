@@ -7,7 +7,7 @@ rules:
     pattern-either:
       - pattern: |
           if $TARGET.startswith($PREFIX):
-            $X = $TARGET[len($PREFIX):]
+            ... = $TARGET[len($PREFIX):]
       - pattern: |
           if $TARGET.startswith($PREFIX):
-            $X = $TARGET[$LEN:]
+            ... = $TARGET[$LEN:]

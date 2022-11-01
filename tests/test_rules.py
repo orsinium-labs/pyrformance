@@ -40,6 +40,8 @@ def parse_output(stdout: str) -> list[dict]:
     ('all(tuple(x))', 'any-all-laziness'),
 
     ('"hello" + a + b', 'str-concat'),
+
+    ('{**a, **b}', 'dict-merge'),
 ])
 def test_rule_violation(code: str, expected: str | None, tmp_path: Path) -> None:
     file_path = tmp_path / 'example.py'
