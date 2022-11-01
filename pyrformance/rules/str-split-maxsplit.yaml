@@ -1,0 +1,11 @@
+rules:
+  - id: str-split-maxsplit
+    languages:
+      - python
+    severity: WARNING
+    message: Add `maxsplit=1` argument into `str.split`.
+    pattern-either:
+      - pattern: $X.split()[0]
+      - pattern: $X.split("...")[0]
+      - pattern: $X.split()[-1]
+      - pattern: $X.split("...")[-1]

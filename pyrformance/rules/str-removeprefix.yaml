@@ -1,0 +1,16 @@
+rules:
+  - id: str-removeprefix
+    languages:
+      - python
+    severity: WARNING
+    message: Use `str.removeprefix`.
+    pattern-either:
+      - pattern: |
+          if $TARGET.startswith($PREFIX):
+            $X = $TARGET[len($PREFIX):]
+      - pattern: |
+          if $TARGET.startswith($PREFIX):
+            $X = $TARGET[$LEN:]
+        metavariable-regex:
+          metavariable: $LEN
+          regex: "[0-9]+"
