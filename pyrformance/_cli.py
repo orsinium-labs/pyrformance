@@ -7,11 +7,13 @@ from typing import NoReturn, TextIO
 
 def main(argv: list[str], stdout: TextIO) -> int:
     rules_path = Path(__file__).parent / 'rules'
-    result = subprocess.run([
+    cmd = [
         sys.executable, '-m', 'semgrep', 'scan',
+        '--disable-version-check',
         '--config', str(rules_path),
         *argv,
-    ])
+    ]
+    result = subprocess.run(cmd, stdout=stdout)
     return result.returncode
 
 
