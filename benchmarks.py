@@ -56,7 +56,27 @@ def _(r):
         item in items
 
 
+str_concat = Group('str-concat')
+
+
+@str_concat.add(name='bad')
+def _(r):
+    a = 'a' * 20
+    b = 'b' * 20
+    for _ in r:
+        'hello' + a + b
+
+
+@str_concat.add(name='good')
+def _(r):
+    a = 'a' * 20
+    b = 'b' * 20
+    for _ in r:
+        f'hello{a}{b}'
+
+
 if __name__ == '__main__':
     maxsplit.print()
     removeprefix.print()
     set_contains.print()
+    str_concat.print()

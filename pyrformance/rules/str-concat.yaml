@@ -1,0 +1,10 @@
+rules:
+  - id: str-concat
+    languages:
+      - python
+    severity: ERROR
+    message: Use f-strings to concatenate multiple strings.
+    pattern-either:
+      - pattern: >
+          "..." + ... + ...
+      - pattern: str(...) + ...
