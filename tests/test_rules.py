@@ -48,6 +48,9 @@ def parse_output(stdout: str) -> list[dict]:
     ('import re\nre.finditer("[0-9]", x)', 're-compile'),
     ('import re\nre.match(pattern, x)', None),
     ('import re\nre.compile("[0-9]")', None),
+
+    ('list(list(x))', 'double-call'),
+    ('list(set(x))', None),
 ])
 def test_rule_violation(code: str, expected: str | None, tmp_path: Path) -> None:
     file_path = tmp_path / 'example.py'

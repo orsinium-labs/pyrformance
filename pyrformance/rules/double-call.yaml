@@ -1,0 +1,18 @@
+rules:
+  - id: double-call
+    languages:
+      - python
+    severity: ERROR
+    message: Function `$F` applied twice.
+    patterns:
+      - pattern: $F($F(...))
+      - metavariable-pattern:
+          metavariable: $F
+          pattern-either:
+            - pattern: dict
+            - pattern: float
+            - pattern: int
+            - pattern: list
+            - pattern: set
+            - pattern: str
+            - pattern: tuple
