@@ -1,0 +1,11 @@
+rules:
+  - id: elif
+    languages:
+      - python
+    severity: ERROR
+    message: Use `elif` to avoid checking `$X` twice.
+    pattern: |
+      if $X in ...:
+          ...
+      if $X in ...:
+          ...

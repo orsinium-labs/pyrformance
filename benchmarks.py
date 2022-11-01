@@ -123,8 +123,36 @@ def _(r):
         rex.match(text)
 
 
+elif_ = Group('elif')
+
+
+@elif_.add(name='bad')
+def _(r):
+    v = '123' * 5
+    c1 = '123' * 9
+    c2 = '123' * 10
+    for _ in r:
+        if v in c1:
+            pass
+        if v in c2:
+            pass
+
+
+@elif_.add(name='good')
+def _(r):
+    v = '123' * 5
+    c1 = '123' * 9
+    c2 = '123' * 10
+    for _ in r:
+        if v in c1:
+            pass
+        elif v in c2:
+            pass
+
+
 if __name__ == '__main__':
     dict_merge.print()
+    elif_.print()
     re_compile.print()
     set_contains.print()
     str_concat.print()
