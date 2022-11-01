@@ -150,9 +150,29 @@ def _(r):
             pass
 
 
+map_ = Group('map')
+
+
+@map_.add(name='bad')
+def _(r):
+    items = range(10_000)
+    for _ in r:
+        for _ in (abs(x) for x in items):
+            pass
+
+
+@map_.add(name='good')
+def _(r):
+    items = range(10_000)
+    for _ in r:
+        for _ in map(abs, items):
+            pass
+
+
 if __name__ == '__main__':
     dict_merge.print()
     elif_.print()
+    map_.print()
     re_compile.print()
     set_contains.print()
     str_concat.print()

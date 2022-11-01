@@ -1,0 +1,9 @@
+rules:
+  - id: map
+    languages:
+      - python
+    severity: ERROR
+    message: >
+      `map` is faster than generator expression.
+    pattern: ($F($X) for $X in $ITEMS)
+    fix: map(%F, %ITEMS)
