@@ -9,6 +9,7 @@ def parse_output(stdout: str) -> list[dict]:
     print(stdout)
     last_line = stdout.splitlines()[-1]
     parsed = json.loads(last_line)
+    assert parsed['errors'] == []
     return parsed['results']
 
 
@@ -26,6 +27,23 @@ def parse_output(stdout: str) -> list[dict]:
     ('"oh hi mark".rsplit(" ")', None),
     ('"oh hi mark".split()[x]', None),
     ('"oh hi mark".split(maxsplit=1)[0]', None),
+
+    ('x in set(y)', 'set-contains'),
+    ('1 in set(y)', 'set-contains'),
+    ('1 in set(x + y)', 'set-contains'),
+
+    ('for x in a + b: ...', 'itertools-chain'),
+    ('for x in a + b + c: ...', 'itertools-chain'),
+    ('for x in list(a) + b: ...', 'itertools-chain'),
+    ('for x in [*a, *b]: ...', 'itertools-chain'),
+    ('for x in [a, *b]: ...', 'itertools-chain'),
+
+    ('any(set(x))', 'any-all-laziness'),
+    ('all(set(x))', 'any-all-laziness'),
+    ('any(list(x))', 'any-all-laziness'),
+    ('all(list(x))', 'any-all-laziness'),
+    ('any(tuple(x))', 'any-all-laziness'),
+    ('all(tuple(x))', 'any-all-laziness'),
 ])
 def test_rule_violation(code: str, expected: str | None, tmp_path: Path) -> None:
     file_path = tmp_path / 'example.py'

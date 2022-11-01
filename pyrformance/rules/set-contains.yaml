@@ -1,0 +1,13 @@
+# items = list(range(1000))
+# %timeit 500 in items
+# # 1.66 µs ± 26.1 ns per loop (mean ± std. dev. of 7 runs, 1,000,000 loops each)
+# %timeit 500 in set(items)
+# # 5.83 µs ± 56.5 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+
+rules:
+  - id: set-contains
+    languages:
+      - python
+    severity: ERROR
+    message: Do not convert to `set` here.
+    pattern: $X in set($Y)

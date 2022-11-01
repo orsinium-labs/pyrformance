@@ -3,13 +3,16 @@ rules:
     languages:
       - python
     severity: ERROR
-    message: Add `maxsplit=1` argument into `str.split`.
-    pattern-either:
-      - pattern: $X.split()[0]
-      - pattern: $X.split("...")[0]
-      - pattern: $X.split()[-1]
-      - pattern: $X.split("...")[-1]
-      - pattern: $X.rsplit()[0]
-      - pattern: $X.rsplit("...")[0]
-      - pattern: $X.rsplit()[-1]
-      - pattern: $X.rsplit("...")[-1]
+    message: Add `maxsplit=1` argument into `str.$METHOD`.
+    patterns:
+      - pattern-either:
+          - pattern: $STR.$METHOD()[0]
+          - pattern: $STR.$METHOD("...")[0]
+          # TODO: if index is -1, split and rsplit should be swapped in the message.
+          - pattern: $STR.$METHOD()[-1]
+          - pattern: $STR.$METHOD("...")[-1]
+      - metavariable-pattern:
+          metavariable: $METHOD
+          pattern-either:
+            - pattern: split
+            - pattern: rsplit

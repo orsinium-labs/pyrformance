@@ -1,0 +1,20 @@
+rules:
+  - id: any-all-laziness
+    languages:
+      - python
+    severity: ERROR
+    message: >
+      `$FUNC` is lazy and will stop at first match, don't convert argument to `$CONV`
+    patterns:
+      - pattern: $FUNC($CONV(...))
+      - metavariable-pattern:
+          metavariable: $FUNC
+          pattern-either:
+            - pattern: any
+            - pattern: all
+      - metavariable-pattern:
+          metavariable: $CONV
+          pattern-either:
+            - pattern: list
+            - pattern: tuple
+            - pattern: set
