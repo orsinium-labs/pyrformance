@@ -1,0 +1,57 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "pyrformance"
+authors = [
+    {name = "Gram", email = "git@orsinium.dev"},
+]
+license = {file = "LICENSE"}
+readme = "README.md"
+requires-python = ">=3.8"
+dynamic = ["version", "description"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Typing :: Typed",
+]
+keywords = [
+    "performance",
+    "speed",
+    "fast",
+    "profiler",
+    "linter",
+    "semgrep",
+    "cli",
+    "pythonic",
+]
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-cov", "pytest-xdist"]
+lint = ["isort", "flake8", "unify", "mypy"]
+
+[project.urls]
+Source = "https://github.com/orsinium-labs/pyrformance"
+
+[project.scripts]
+pyrformance = "pyrformance:entrypoint"
+
+[tool.mypy]
+files = ["pyrformance"]
+python_version = 3.8
+ignore_missing_imports = true
+show_error_codes = true
+check_untyped_defs = true
+no_implicit_optional = true
+strict_equality = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+
+[tool.isort]
+profile = "django"
+lines_after_imports = 2
+skip = ".venvs/"
