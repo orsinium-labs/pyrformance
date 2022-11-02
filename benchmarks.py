@@ -267,11 +267,30 @@ def _(r):
             identity(i)
 
 
+dict_update = Group('dict-update')
+
+
+@dict_update.add(name='bad')
+def _(r):
+    for _ in r:
+        d = {}
+        d.update({'a': 1})
+
+
+@dict_update.add(name='good')
+def _(r):
+    for _ in r:
+        d = {}
+        d['a'] = 1
+
+
 GROUPS = (
     any_to_or,
+    dict_update,
     double_startswith,
     elif_,
     filter_,
+    for_compr,
     map_,
     min_to_if,
     re_compile,

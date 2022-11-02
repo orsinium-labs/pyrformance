@@ -1,0 +1,13 @@
+rules:
+  - id: dict-update
+    languages:
+      - python
+    severity: ERROR
+    message: assign an item to dict instead of using `dict.update` with one-element dict.
+    pattern-either:
+      - pattern: >
+          $DICT.update({$K: $V})
+      - pattern: >
+          $DICT.update(dict($K=$V))
+    fix: >
+      $DICT[$K] = $V
