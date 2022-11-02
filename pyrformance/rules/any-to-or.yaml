@@ -1,0 +1,10 @@
+rules:
+  - id: any-to-or
+    languages:
+      - python
+    severity: ERROR
+    message: use `or` instead of `any` here.
+    pattern-either:
+      - pattern: any([$A, ...])
+      - pattern: any(($A, ...))
+      - pattern: any({$A, ...})

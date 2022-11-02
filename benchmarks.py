@@ -39,7 +39,7 @@ def _(r):
     text = 'lorem ipsum dolor sit amet'
     prefix = 'lorem ipsum'
     for _ in r:
-        text.removeprefix(prefix)
+        text.removeprefix(prefix)  # type: ignore[attr-defined]
 
 
 set_contains = Group('set-contains')
@@ -202,7 +202,25 @@ def _(r):
         text.startswith((prefix1, prefix2))
 
 
+any_to_or = Group('any-to-or')
+
+
+@any_to_or.add(name='bad')
+def _(r):
+    for _ in r:
+        if any([0, False, '', 1]):
+            pass
+
+
+@any_to_or.add(name='good')
+def _(r):
+    for _ in r:
+        if 0 or False or '' or 1:
+            pass
+
+
 GROUPS = (
+    double_startswith,
     elif_,
     filter_,
     map_,

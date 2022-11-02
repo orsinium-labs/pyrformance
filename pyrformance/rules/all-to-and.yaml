@@ -1,0 +1,10 @@
+rules:
+  - id: all-to-and
+    languages:
+      - python
+    severity: ERROR
+    message: use `and` instead of `all` here.
+    pattern-either:
+      - pattern: all([$A, ...])
+      - pattern: all(($A, ...))
+      - pattern: all({$A, ...})

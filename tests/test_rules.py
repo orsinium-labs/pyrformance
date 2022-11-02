@@ -61,6 +61,18 @@ def parse_output(stdout: str) -> list[dict]:
 
     ('a.startswith("hi") or a.startswith("hello")', 'double-startswith'),
     ('a.startswith("hi") or b.startswith("hi")', None),
+
+    ('any([a])', 'any-to-or'),
+    ('any([a, b])', 'any-to-or'),
+    ('any([a, b, c])', 'any-to-or'),
+    ('any([a for a in b])', None),
+    ('any(a for a in b)', None),
+
+    ('all([a])', 'all-to-and'),
+    ('all([a, b])', 'all-to-and'),
+    ('all([a, b, c])', 'all-to-and'),
+    ('all([a for a in b])', None),
+    ('all(a for a in b)', None),
 ])
 def test_rule_violation(code: str, expected: str | None, tmp_path: Path) -> None:
     file_path = tmp_path / 'example.py'
