@@ -45,8 +45,6 @@ def parse_output(stdout: str) -> list[dict]:
 
     ('"hello" + a + b', 'str-concat'),
 
-    ('{**a, **b}', 'dict-merge'),
-
     ('import re\nre.match("[0-9]", x)', 're-compile'),
     ('import re\nre.finditer("[0-9]", x)', 're-compile'),
     ('import re\nre.match(pattern, x)', None),

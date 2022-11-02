@@ -80,34 +80,6 @@ def _(r):
         f'hello{a}{b}'
 
 
-dict_merge = Group('dict-merge')
-
-
-@dict_merge.add(name='bad1')
-def _(r):
-    d1 = {i: i * 2 for i in range(100)}
-    d2 = {i: i * 2 for i in range(100)}
-    for _ in r:
-        {**d1, **d2}
-
-
-@dict_merge.add(name='bad2')
-def _(r):
-    d1 = {i: i * 2 for i in range(100)}
-    d2 = {i: i * 2 for i in range(100)}
-    for _ in r:
-        d = d1.copy()
-        d.update(d2)
-
-
-@dict_merge.add(name='good')
-def _(r):
-    d1 = {i: i * 2 for i in range(100)}
-    d2 = {i: i * 2 for i in range(100)}
-    for _ in r:
-        d1 | d2
-
-
 re_compile = Group('re-compile')
 
 
@@ -210,7 +182,6 @@ def _(r):
 
 
 GROUPS = (
-    dict_merge,
     elif_,
     filter_,
     map_,
