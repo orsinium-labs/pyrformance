@@ -219,11 +219,33 @@ def _(r):
             pass
 
 
+min_to_if = Group('min-to-if')
+
+
+@min_to_if.add(name='bad')
+def _(r):
+    b = 100
+    for _ in r:
+        a = 1000
+        a = min(a, b)
+
+
+@min_to_if.add(name='good')
+def _(r):
+    b = 100
+    for _ in r:
+        a = 1000
+        if b < a:
+            a = b
+
+
 GROUPS = (
+    any_to_or,
     double_startswith,
     elif_,
     filter_,
     map_,
+    min_to_if,
     re_compile,
     set_contains,
     str_concat,

@@ -1,0 +1,14 @@
+rules:
+  - id: min-to-if
+    languages:
+      - python
+    severity: ERROR
+    message: use `if` condition instead of `min` here.
+    pattern-either:
+      - pattern: $A = min($A, $B)
+      - pattern: $A = min($B, $A)
+      - pattern: $A = min([$A, $B])
+      - pattern: $A = min([$B, $A])
+    fix: |
+      if $B < $A:
+        $A = $B

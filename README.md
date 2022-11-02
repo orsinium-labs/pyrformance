@@ -8,7 +8,7 @@ Features:
 
 + **Non-opinionated**. If pyrformance reports something, changing it will make your code faster. That's it. It won't tell you to change something just because it's a "pythonic", consistent, or whatever else.
 + **Benchmarked**. For each rule, we have a [true-north](https://github.com/orsinium-labs/true-north)-powered benchmark that shows that the rule indeed makes code faster. We don't play guessing or advice something just because a random Medium article says so.
-+ **Tested**. We have tests for each rule, which is quite unusual for semgrep-rules you can find in the wild.
++ **Tested**. We have tests for each rule, which is quite unusual for semgrep rules you can find in the wild.
 + **Never compromises readability**. We do our best to not recommend any changes that would make the code less readable, even if that would be faster.
 
 ## Installation
