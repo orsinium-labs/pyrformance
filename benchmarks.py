@@ -284,6 +284,25 @@ def _(r):
         d['a'] = 1
 
 
+if_len = Group('if-len')
+
+
+@if_len.add(name='bad')
+def _(r):
+    items = list(range(10_000))
+    for _ in r:
+        if len(items) > 0:
+            pass
+
+
+@if_len.add(name='good')
+def _(r):
+    items = list(range(10_000))
+    for _ in r:
+        if items:
+            pass
+
+
 GROUPS = (
     any_to_or,
     dict_update,

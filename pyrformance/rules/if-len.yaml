@@ -1,0 +1,19 @@
+rules:
+  - id: if-len
+    languages:
+      - python
+    severity: ERROR
+    message: don't use `len` check in `if`, check for the value being falsy.
+    pattern-either:
+      - pattern: |
+          if len(...) > 0:
+              ...
+      - pattern: |
+          if len(...) >= 1:
+              ...
+      - pattern: |
+          if len(...) == 0:
+              ...
+      - pattern: |
+          if len(...) <= 0:
+              ...
