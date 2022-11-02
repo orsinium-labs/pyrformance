@@ -181,6 +181,27 @@ def _(r):
             pass
 
 
+double_startswith = Group('double-startswith')
+
+
+@double_startswith.add(name='bad')
+def _(r):
+    text = 'ab' * 100
+    prefix1 = 'abcd'
+    prefix2 = 'ab' * 80
+    for _ in r:
+        text.startswith(prefix1) or text.startswith(prefix2)
+
+
+@double_startswith.add(name='good')
+def _(r):
+    text = 'ab' * 100
+    prefix1 = 'abcd'
+    prefix2 = 'ab' * 80
+    for _ in r:
+        text.startswith((prefix1, prefix2))
+
+
 GROUPS = (
     elif_,
     filter_,

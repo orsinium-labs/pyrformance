@@ -58,6 +58,9 @@ def parse_output(stdout: str) -> list[dict]:
 
     ('(x for x in y if abs(x))', 'filter'),
     ('(x for x in y if x > 10)', None),
+
+    ('a.startswith("hi") or a.startswith("hello")', 'double-startswith'),
+    ('a.startswith("hi") or b.startswith("hi")', None),
 ])
 def test_rule_violation(code: str, expected: str | None, tmp_path: Path) -> None:
     file_path = tmp_path / 'example.py'

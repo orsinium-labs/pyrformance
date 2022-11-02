@@ -1,0 +1,9 @@
+rules:
+  - id: double-startswith
+    languages:
+      - python
+    severity: ERROR
+    message: >
+      `startswith` can accept a tuple of prefixes to check.
+    pattern: $X.startswith($A) or $X.startswith($B)
+    fix: $X.startswith(($A, $B))
