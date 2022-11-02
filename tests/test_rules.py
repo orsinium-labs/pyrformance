@@ -81,6 +81,12 @@ def parse_output(stdout: str) -> list[dict]:
     ('a = min([a, b])', 'min-to-if'),
     ('c = min(a, b)', None),
     ('a = min(a, b, c)', None),
+
+    ('a = max(a, b)', 'max-to-if'),
+    ('a = max(b, a)', 'max-to-if'),
+    ('a = max([a, b])', 'max-to-if'),
+    ('c = max(a, b)', None),
+    ('a = max(a, b, c)', None),
 ])
 def test_rule_violation(code: str, expected: str | None, tmp_path: Path) -> None:
     file_path = tmp_path / 'example.py'

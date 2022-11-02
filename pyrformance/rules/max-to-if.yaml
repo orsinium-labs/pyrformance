@@ -1,0 +1,14 @@
+rules:
+  - id: max-to-if
+    languages:
+      - python
+    severity: ERROR
+    message: use `if` condition instead of `max` here.
+    pattern-either:
+      - pattern: $A = max($A, $B)
+      - pattern: $A = max($B, $A)
+      - pattern: $A = max([$A, $B])
+      - pattern: $A = max([$B, $A])
+    fix: |
+      if $B > $A:
+          $A = $B

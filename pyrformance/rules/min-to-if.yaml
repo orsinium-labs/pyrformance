@@ -11,4 +11,4 @@ rules:
       - pattern: $A = min([$B, $A])
     fix: |
       if $B < $A:
-        $A = $B
+          $A = $B
