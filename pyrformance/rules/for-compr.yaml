@@ -1,0 +1,13 @@
+rules:
+  - id: for-compr
+    languages:
+      - python
+    severity: ERROR
+    message: Don't use list comprehension as loop target, do that logic inside the loop body.
+    pattern-either:
+      - pattern: |
+          for ... in (... for ... in ...):
+            ...
+      - pattern: |
+          for ... in [... for ... in ...]:
+            ...

@@ -87,6 +87,8 @@ def parse_output(stdout: str) -> list[dict]:
     ('a = max([a, b])', 'max-to-if'),
     ('c = max(a, b)', None),
     ('a = max(a, b, c)', None),
+
+    ('for a in [x(a) for a in b]: pass', 'for-compr'),
 ])
 def test_rule_violation(code: str, expected: str | None, tmp_path: Path) -> None:
     file_path = tmp_path / 'example.py'

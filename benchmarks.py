@@ -239,6 +239,34 @@ def _(r):
             a = b
 
 
+for_compr = Group('for-compr')
+
+
+@for_compr.add(name='bad gen expr')
+def _(r):
+    items = range(10_000)
+    for _ in r:
+        for i in (identity(i) for i in items):
+            identity(i)
+
+
+@for_compr.add(name='bad list comp')
+def _(r):
+    items = range(10_000)
+    for _ in r:
+        for i in [identity(i) for i in items]:
+            identity(i)
+
+
+@for_compr.add(name='good')
+def _(r):
+    items = range(10_000)
+    for _ in r:
+        for i in items:
+            i = identity(i)
+            identity(i)
+
+
 GROUPS = (
     any_to_or,
     double_startswith,
