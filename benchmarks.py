@@ -1,6 +1,10 @@
 from true_north import Group
 
 
+def identity(x):
+    return x
+
+
 str_split_maxsplit = Group('str-split-maxsplit')
 
 
@@ -154,11 +158,19 @@ def _(r):
 map_ = Group('map')
 
 
-@map_.add(name='bad')
+@map_.add(name='bad gen expr')
 def _(r):
     items = range(10_000)
     for _ in r:
-        for _ in (abs(x) for x in items):
+        for _ in (identity(x) for x in items):
+            pass
+
+
+@map_.add(name='bad list comp')
+def _(r):
+    items = range(10_000)
+    for _ in r:
+        for _ in [identity(x) for x in items]:
             pass
 
 
@@ -166,16 +178,50 @@ def _(r):
 def _(r):
     items = range(10_000)
     for _ in r:
-        for _ in map(abs, items):
+        for _ in map(identity, items):
             pass
 
 
+filter_ = Group('filter')
+
+
+@filter_.add(name='bad gen expr')
+def _(r):
+    items = range(10_000)
+    for _ in r:
+        for _ in (x for x in items if bool(x)):
+            pass
+
+
+@filter_.add(name='bad list comp')
+def _(r):
+    items = range(10_000)
+    for _ in r:
+        for _ in [x for x in items if bool(x)]:
+            pass
+
+
+@filter_.add(name='good')
+def _(r):
+    items = range(10_000)
+    for _ in r:
+        for _ in filter(bool, items):
+            pass
+
+
+GROUPS = (
+    dict_merge,
+    elif_,
+    filter_,
+    map_,
+    re_compile,
+    set_contains,
+    str_concat,
+    str_removeprefix,
+    str_split_maxsplit,
+)
+
+
 if __name__ == '__main__':
-    dict_merge.print()
-    elif_.print()
-    map_.print()
-    re_compile.print()
-    set_contains.print()
-    str_concat.print()
-    str_removeprefix.print()
-    str_split_maxsplit.print()
+    for group in GROUPS:
+        group.print()

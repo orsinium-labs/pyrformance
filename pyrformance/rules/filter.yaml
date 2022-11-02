@@ -1,0 +1,9 @@
+rules:
+  - id: filter
+    languages:
+      - python
+    severity: ERROR
+    message: >
+      `filter` is faster than generator expression.
+    pattern: ($X for $X in $ITEMS if $F($X))
+    fix: filter(%F, %ITEMS)

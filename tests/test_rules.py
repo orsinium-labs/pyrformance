@@ -57,6 +57,9 @@ def parse_output(stdout: str) -> list[dict]:
 
     ('(abs(x) for x in y)', 'map'),
     ('(abs(x) for x in y if x)', None),
+
+    ('(x for x in y if abs(x))', 'filter'),
+    ('(x for x in y if x > 10)', None),
 ])
 def test_rule_violation(code: str, expected: str | None, tmp_path: Path) -> None:
     file_path = tmp_path / 'example.py'
