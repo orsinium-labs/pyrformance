@@ -10,14 +10,14 @@ str_split_maxsplit = Group('str-split-maxsplit')
 
 @str_split_maxsplit.add(name='bad')
 def _(r):
-    text = 'ab cd ' * 100
+    text = 'ab cd ' * 10
     for _ in r:
         text.split()[0]
 
 
 @str_split_maxsplit.add(name='good')
 def _(r):
-    text = 'ab cd ' * 100
+    text = 'ab cd ' * 10
     for _ in r:
         text.split(maxsplit=1)[0]
 
@@ -303,23 +303,18 @@ def _(r):
             pass
 
 
-GROUPS = (
-    any_to_or,
-    dict_update,
-    double_startswith,
-    elif_,
-    filter_,
-    for_compr,
-    map_,
-    min_to_if,
-    re_compile,
-    set_contains,
-    str_concat,
-    str_removeprefix,
-    str_split_maxsplit,
-)
+dict_fromkeys = Group('dict-fromkeys')
 
 
-if __name__ == '__main__':
-    for group in GROUPS:
-        group.print()
+@dict_fromkeys.add(name='bad')
+def _(r):
+    items = range(10_000)
+    for _ in r:
+        {i: 1 for i in items}
+
+
+@dict_fromkeys.add(name='good')
+def _(r):
+    items = range(10_000)
+    for _ in r:
+        dict.fromkeys(items, 1)

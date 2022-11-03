@@ -70,6 +70,9 @@ tasks:
       - install:lint
     cmds:
       - "{{.FLITENV}} lint run isort --check {{.CLI_ARGS}} ."
+  benchmark:
+    cmds:
+      - python3.11 -m true_north benchmarks.py {{.CLI_ARGS}}
 
   # groups
   format:

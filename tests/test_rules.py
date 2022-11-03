@@ -94,6 +94,8 @@ def parse_output(stdout: str) -> list[dict]:
 
     ('if len(x) > 0: pass', 'if-len'),
     ('if len(x) == 0: pass', 'if-len'),
+
+    ('{i: 1 for i in items}', 'dict-fromkeys'),
 ])
 def test_rule_violation(code: str, expected: str | None, tmp_path: Path) -> None:
     file_path = tmp_path / 'example.py'

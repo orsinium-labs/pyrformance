@@ -1,0 +1,9 @@
+rules:
+  - id: dict-fromkeys
+    languages:
+      - python
+    severity: ERROR
+    message: use `dict.fromkeys` to generate dict with fixed values
+    pattern: >
+      {$K: $V for $K in $ITEMS}
+    fix: dict.fromkeys($ITEMS, $V)
