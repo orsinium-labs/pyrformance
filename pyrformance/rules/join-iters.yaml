@@ -1,0 +1,10 @@
+rules:
+  - id: join-iters
+    languages:
+      - python
+    severity: ERROR
+    message: use `[*a, *b]` syntax to merge iterables into a list.
+    pattern-either:
+      - pattern: list($A) + $B
+      - pattern: $A + list($B)
+    fix: '[*$A, *$B]'

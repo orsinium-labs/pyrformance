@@ -318,3 +318,22 @@ def _(r):
     items = range(10_000)
     for _ in r:
         dict.fromkeys(items, 1)
+
+
+join_iters = Group('join-iters')
+
+
+@join_iters.add(name='bad')
+def _(r):
+    l1 = list(range(1000))
+    l2 = list(range(1000))
+    for _ in r:
+        list(l1) + l2
+
+
+@join_iters.add(name='good')
+def _(r):
+    l1 = list(range(1000))
+    l2 = list(range(1000))
+    for _ in r:
+        [*l1, *l2]
