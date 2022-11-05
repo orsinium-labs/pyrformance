@@ -1,5 +1,5 @@
 rules:
-  - id: join-iters
+  - id: join-iters-to-list
     languages:
       - python
     severity: ERROR

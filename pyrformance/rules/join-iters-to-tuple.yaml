@@ -1,0 +1,10 @@
+rules:
+  - id: join-iters-to-tuple
+    languages:
+      - python
+    severity: ERROR
+    message: use `(*a, *b)` syntax to merge iterables into a tuple.
+    pattern-either:
+      - pattern: tuple($A) + $B
+      - pattern: $A + tuple($B)
+    fix: '(*$A, *$B)'

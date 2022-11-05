@@ -320,10 +320,10 @@ def _(r):
         dict.fromkeys(items, 1)
 
 
-join_iters = Group('join-iters')
+join_iters_to_list = Group('join-iters-to-list')
 
 
-@join_iters.add(name='bad')
+@join_iters_to_list.add(name='bad')
 def _(r):
     l1 = list(range(1000))
     l2 = list(range(1000))
@@ -331,9 +331,28 @@ def _(r):
         list(l1) + l2
 
 
-@join_iters.add(name='good')
+@join_iters_to_list.add(name='good')
 def _(r):
     l1 = list(range(1000))
     l2 = list(range(1000))
     for _ in r:
         [*l1, *l2]
+
+
+join_iters_to_tuple = Group('join-iters-to-list')
+
+
+@join_iters_to_tuple.add(name='bad')
+def _(r):
+    l1 = list(range(1000))
+    l2 = tuple(range(1000))
+    for _ in r:
+        tuple(l1) + l2
+
+
+@join_iters_to_tuple.add(name='good')
+def _(r):
+    l1 = list(range(1000))
+    l2 = tuple(range(1000))
+    for _ in r:
+        (*l1, *l2)

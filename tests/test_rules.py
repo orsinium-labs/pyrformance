@@ -97,12 +97,20 @@ def parse_output(stdout: str) -> list[dict]:
 
     ('{i: 1 for i in items}', 'dict-fromkeys'),
 
-    ('list(a) + b', 'join-iters'),
-    ('list(a) + b + c', 'join-iters'),
-    ('a + list(b)', 'join-iters'),
-    ('a + list(b) + c', 'join-iters'),
+    ('list(a) + b', 'join-iters-to-list'),
+    ('list(a) + b + c', 'join-iters-to-list'),
+    ('a + list(b)', 'join-iters-to-list'),
+    ('a + list(b) + c', 'join-iters-to-list'),
+    ('list(a) + list(b)', 'join-iters-to-list'),
     ('a + b', None),
     ('a + [b]', None),
+
+    ('tuple(a) + b', 'join-iters-to-tuple'),
+    ('tuple(a) + b + c', 'join-iters-to-tuple'),
+    ('a + tuple(b)', 'join-iters-to-tuple'),
+    ('a + tuple(b) + c', 'join-iters-to-tuple'),
+    ('tuple(a) + tuple(b)', 'join-iters-to-tuple'),
+    ('a + (b,)', None),
 ])
 def test_rule_violation(code: str, expected: str | None, tmp_path: Path) -> None:
     file_path = tmp_path / 'example.py'
